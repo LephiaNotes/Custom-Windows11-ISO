@@ -1,0 +1,15 @@
+Windows Registry Editor Version 5.00
+
+; =====================================================================
+; Stop Windows from silently installing "manufacturer apps" for devices
+; (AMD Software: Adrenalin, Realtek Audio Console, Intel/Logitech/Razer apps...)
+; and downloading device icons. DRIVERS STILL INSTALL from Windows Update.
+; Install any companion app you want yourself (Store / maker's site).
+; Undo on an installed PC: Revert-Tweaks.ps1 -Only Drivers
+; =====================================================================
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\Device Metadata]
+"PreventDeviceMetadataFromNetwork"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Microsoft\Windows\CurrentVersion\Device Metadata]
+"PreventDeviceMetadataFromNetwork"=dword:00000001

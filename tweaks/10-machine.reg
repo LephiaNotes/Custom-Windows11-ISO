@@ -1,0 +1,112 @@
+Windows Registry Editor Version 5.00
+
+; =====================================================================
+; Machine-wide tweaks. Imported into the OFFLINE image by
+; Build-CustomISO.ps1 (hives loaded as HKLM\WIM_SOFTWARE / HKLM\WIM_SYSTEM).
+; Delete any block you do not want. Revert-Tweaks.ps1 undoes these on
+; an installed PC.
+; None of these touch Windows Update, the Microsoft Store or Defender.
+; =====================================================================
+
+; ---------------- Telemetry / diagnostics ----------------
+; AllowTelemetry=0 is "Security" level on Enterprise/Education.
+; On Home/Pro Windows treats it as 1 ("Required"), the lowest it allows.
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\DataCollection]
+"AllowTelemetry"=dword:00000000
+"AllowDeviceNameInTelemetry"=dword:00000000
+"DoNotShowFeedbackNotifications"=dword:00000001
+"LimitDiagnosticLogCollection"=dword:00000001
+"LimitDumpCollection"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\DataCollection]
+"AllowTelemetry"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\SQMClient\Windows]
+"CEIPEnable"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\AppCompat]
+"AITEnable"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\Windows Error Reporting]
+"Disabled"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\AdvertisingInfo]
+"DisabledByGroupPolicy"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\System]
+"EnableActivityFeed"=dword:00000000
+"PublishUserActivities"=dword:00000000
+"UploadUserActivities"=dword:00000000
+
+; Skip the "Choose privacy settings for your device" page in OOBE
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\OOBE]
+"DisablePrivacyExperience"=dword:00000001
+
+; ---------------- Copilot / Recall / AI ----------------
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\WindowsCopilot]
+"TurnOffWindowsCopilot"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\WindowsAI]
+"DisableAIDataAnalysis"=dword:00000001
+"AllowRecallEnablement"=dword:00000000
+"DisableClickToDo"=dword:00000001
+
+; Copilot sidebar in Edge
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Edge]
+"HubsSidebarEnabled"=dword:00000000
+
+; ---------------- OneDrive ----------------
+; Blocks OneDrive from syncing. Remove this block if you may want OneDrive later.
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\OneDrive]
+"DisableFileSyncNGSC"=dword:00000001
+
+; ---------------- Ads, suggestions, auto-installed apps ----------------
+; DisableWindowsConsumerFeatures is only fully honored on Enterprise/Education;
+; the per-user ContentDeliveryManager keys in 20-default-user.reg cover Home/Pro.
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\CloudContent]
+"DisableWindowsConsumerFeatures"=dword:00000001
+"DisableConsumerAccountStateContent"=dword:00000001
+"DisableCloudOptimizedContent"=dword:00000001
+
+; Widgets: Windows protects this policy key in the offline image, so it is set at
+; first sign-in by FirstLogon.ps1 instead, and the Widgets app is removed (remove-apps.txt).
+
+; Teams/Chat auto-install and icon
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Microsoft\Windows\CurrentVersion\Communications]
+"ConfigureChatAutoInstall"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\Windows Chat]
+"ChatIcon"=dword:00000003
+
+; Stop new Outlook and Dev Home from being pushed during setup
+[-HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\OutlookUpdate]
+[-HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Microsoft\WindowsUpdate\Orchestrator\UScheduler_Oobe\DevHomeUpdate]
+
+; Web/Bing results in Start search
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\Windows Search]
+"AllowCortana"=dword:00000000
+"DisableWebSearch"=dword:00000001
+"ConnectedSearchUseWeb"=dword:00000000
+
+; ---------------- Delivery Optimization ----------------
+; 0 = download updates from Microsoft only, no peer-to-peer upload/download.
+; Windows Update still works normally.
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization]
+"DODownloadMode"=dword:00000000
+
+; ---------------- Services (Start: 2=Auto 3=Manual 4=Disabled) ----------------
+; Connected User Experiences and Telemetry
+[HKEY_LOCAL_MACHINE\WIM_SYSTEM\ControlSet001\Services\DiagTrack]
+"Start"=dword:00000004
+
+; WAP Push Message Routing (telemetry helper)
+[HKEY_LOCAL_MACHINE\WIM_SYSTEM\ControlSet001\Services\dmwappushservice]
+"Start"=dword:00000004
+
+; Downloaded Maps Manager (Maps app is removed)
+[HKEY_LOCAL_MACHINE\WIM_SYSTEM\ControlSet001\Services\MapsBroker]
+"Start"=dword:00000004
+
+; Retail Demo
+[HKEY_LOCAL_MACHINE\WIM_SYSTEM\ControlSet001\Services\RetailDemo]
+"Start"=dword:00000004

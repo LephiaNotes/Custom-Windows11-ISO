@@ -1,0 +1,42 @@
+Windows Registry Editor Version 5.00
+
+; Only needed if you REMOVE the Xbox apps (see config\remove-apps.txt).
+; Copy this file up into tweaks\ to have it imported at build time.
+; Turns off Game Bar / Game DVR and stops the
+; "You'll need a new app to open this ms-gamebar link" pop-up.
+
+; ---------------- Game Bar (Xbox apps are removed) ----------------
+; Without this, Win+G, the controller Xbox button or some games pop up
+; "You'll need a new app to open this ms-gamebar link".
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\GameDVR]
+"AllowGameDVR"=dword:00000000
+
+; Point the ms-gamebar / ms-gamingoverlay links at a do-nothing handler
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Classes\ms-gamebar]
+@="URL:ms-gamebar"
+"URL Protocol"=""
+"NoOpenWith"=""
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Classes\ms-gamebar\shell\open\command]
+@="\"C:\\Windows\\System32\\systray.exe\""
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Classes\ms-gamingoverlay]
+@="URL:ms-gamingoverlay"
+"URL Protocol"=""
+"NoOpenWith"=""
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Classes\ms-gamingoverlay\shell\open\command]
+@="\"C:\\Windows\\System32\\systray.exe\""
+
+; ---------------- Game Bar / Game DVR off (Xbox apps are removed) ----------------
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\System\GameConfigStore]
+"GameDVR_Enabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\Windows\CurrentVersion\GameDVR]
+"AppCaptureEnabled"=dword:00000000
+
+; Controller Xbox/Guide button no longer tries to open Game Bar
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\GameBar]
+"UseNexusForGameBarEnabled"=dword:00000000
+"ShowStartupPanel"=dword:00000000
+

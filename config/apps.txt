@@ -1,0 +1,43 @@
+# Apps for the new PC. The build downloads each one's installer (winget download) and puts it
+# inside the ISO, so they install at first sign-in WITHOUT internet. Anything that fails to
+# download is installed online with winget instead. Downloads are cached in <WorkDir>\downloads;
+# build with -RefreshDownloads to fetch the newest versions.
+# (Steam, League and Discord are small launchers: they still download the rest when first opened.)
+# Find IDs with:  winget search <name>   or at https://winget.run
+#
+# FORMAT:  PackageID                          installs to the app's normal folder
+#          PackageID | C:\Apps\Name           installs to that folder
+#          PackageID | {Gaming Drive}\Games\Steam     installs on the drive whose volume LABEL is "Gaming Drive"
+#          PackageID | <folder> | ask         installer has no folder switch: its window opens,
+#                                             and the folder to pick is shown (and copied to the clipboard)
+#
+# {Gaming Drive} = your second drive. No need to prepare anything:
+#   - if a drive is labelled "Gaming Drive", that one is used;
+#   - otherwise the largest internal NTFS drive that isn't C: is used (USB sticks are skipped)
+#     and it gets labelled "Gaming Drive" so it's recognisable later;
+#   - no second drive (or it's brand new and unformatted): the app installs to its normal folder on C:.
+# FirstLogon.log says which drive was picked.
+#
+# Optional default folder for every app WITHOUT its own path (each gets a subfolder):
+# @default C:\Apps
+
+# --- Games (second drive "Gaming Drive", in its "Games" folder) ---
+Valve.Steam                       | {Gaming Drive}\Games\Steam
+# League of Legends, SEA server (SG2 = Singapore / Southeast Asia). Other regions: .NA .EUW .EUNE .OC1 .PH2 .TH2 .VN2 .TW2 .JP .KR ...
+RiotGames.LeagueOfLegends.SG2     | {Gaming Drive}\Games\Riot Games | ask
+
+# --- Apps ---
+VideoLAN.VLC
+Guru3D.Afterburner
+Guru3D.RTSS
+Git.Git
+Obsidian.Obsidian
+RARLab.WinRAR
+Discord.Discord
+Microsoft.VCRedist.2015+.x64
+
+# --- Other ideas (uncomment to add) ---
+# 7zip.7zip
+# Mozilla.Firefox
+# Microsoft.PowerToys
+# EpicGames.EpicGamesLauncher     | {Gaming Drive}\Games\Epic Games
