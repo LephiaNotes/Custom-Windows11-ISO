@@ -1,0 +1,77 @@
+Windows Registry Editor Version 5.00
+
+; =====================================================================
+; Per-user tweaks, written into the Default user profile of the OFFLINE
+; image (loaded as HKLM\WIM_DEFAULT), so every account created on the new
+; PC starts with them.
+; =====================================================================
+
+; ---------------- OneDrive: do not auto-install for new users ----------------
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\Windows\CurrentVersion\Run]
+"OneDriveSetup"=-
+
+; ---------------- Copilot ----------------
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Policies\Microsoft\Windows\WindowsCopilot]
+"TurnOffWindowsCopilot"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Policies\Microsoft\Windows\WindowsAI]
+"DisableAIDataAnalysis"=dword:00000001
+
+; ---------------- Taskbar / Start ----------------
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced]
+"ShowCopilotButton"=dword:00000000
+"TaskbarMn"=dword:00000000
+"Start_IrisRecommendations"=dword:00000000
+"Start_AccountNotifications"=dword:00000000
+"ShowSyncProviderNotifications"=dword:00000000
+
+; No Bing / web suggestions in Start search
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Policies\Microsoft\Windows\Explorer]
+"DisableSearchBoxSuggestions"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\Windows\CurrentVersion\Search]
+"BingSearchEnabled"=dword:00000000
+
+; ---------------- Ads, tips, silently installed apps ----------------
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager]
+"ContentDeliveryAllowed"=dword:00000000
+"FeatureManagementEnabled"=dword:00000000
+"OemPreInstalledAppsEnabled"=dword:00000000
+"PreInstalledAppsEnabled"=dword:00000000
+"PreInstalledAppsEverEnabled"=dword:00000000
+"SilentInstalledAppsEnabled"=dword:00000000
+"SoftLandingEnabled"=dword:00000000
+"SubscribedContentEnabled"=dword:00000000
+"SystemPaneSuggestionsEnabled"=dword:00000000
+"RotatingLockScreenOverlayEnabled"=dword:00000000
+"SubscribedContent-310093Enabled"=dword:00000000
+"SubscribedContent-338388Enabled"=dword:00000000
+"SubscribedContent-338389Enabled"=dword:00000000
+"SubscribedContent-338393Enabled"=dword:00000000
+"SubscribedContent-353694Enabled"=dword:00000000
+"SubscribedContent-353696Enabled"=dword:00000000
+"SubscribedContent-353698Enabled"=dword:00000000
+
+; "Let's finish setting up your device" nag screen
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement]
+"ScoobeSystemSettingEnabled"=dword:00000000
+
+; ---------------- Privacy ----------------
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\Windows\CurrentVersion\AdvertisingInfo]
+"Enabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\Windows\CurrentVersion\Privacy]
+"TailoredExperiencesWithDiagnosticDataEnabled"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\Siuf\Rules]
+"NumberOfSIUFInPeriod"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\InputPersonalization]
+"RestrictImplicitInkCollection"=dword:00000001
+"RestrictImplicitTextCollection"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\InputPersonalization\TrainedDataStore]
+"HarvestContacts"=dword:00000000
+
+[HKEY_LOCAL_MACHINE\WIM_DEFAULT\Software\Microsoft\Personalization\Settings]
+"AcceptedPrivacyPolicy"=dword:00000000

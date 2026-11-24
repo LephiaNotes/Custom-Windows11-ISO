@@ -1,0 +1,16 @@
+Windows Registry Editor Version 5.00
+
+; =====================================================================
+; ON by default (you install drivers yourself on every PC).
+; Windows Update stops installing/updating ANY driver (GPU, chipset, Wi-Fi, LAN,
+; audio, printers...). Windows' own built-in drivers still work, so most PCs still
+; get online; install the rest yourself from the makers' sites.
+; To let Windows Update handle drivers instead, delete this file before building.
+; Undo on an installed PC: Revert-Tweaks.ps1 -Only Drivers
+; =====================================================================
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate]
+"ExcludeWUDriversInQualityUpdate"=dword:00000001
+
+[HKEY_LOCAL_MACHINE\WIM_SOFTWARE\Microsoft\Windows\CurrentVersion\DriverSearching]
+"SearchOrderConfig"=dword:00000000

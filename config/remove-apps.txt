@@ -1,0 +1,63 @@
+# Preinstalled (provisioned) apps removed from the image.
+# Wildcards allowed. Lines starting with # are skipped; comment out anything you want to keep.
+# The Store, App Installer (winget), Windows Security, Terminal, Notepad and runtime
+# libraries are protected in the build script and are never removed.
+
+# --- AI / Copilot ---
+Microsoft.Copilot
+Microsoft.Windows.Ai.Copilot.Provider
+MicrosoftWindows.Client.AIX
+Microsoft.Windows.DevHome
+
+# --- Microsoft promo / news ---
+MicrosoftWindows.Client.WebExperience   # Widgets board (and its taskbar button)
+Clipchamp.Clipchamp
+Microsoft.BingNews
+Microsoft.BingWeather
+Microsoft.BingSearch
+Microsoft.GetHelp
+Microsoft.Getstarted
+Microsoft.MicrosoftOfficeHub
+Microsoft.MicrosoftSolitaireCollection
+Microsoft.Office.OneNote
+Microsoft.OutlookForWindows
+Microsoft.People
+Microsoft.PowerAutomateDesktop
+Microsoft.Todos
+Microsoft.WindowsFeedbackHub
+Microsoft.WindowsMaps
+Microsoft.549981C3F5F10
+Microsoft.windowscommunicationsapps
+Microsoft.MixedReality.Portal
+Microsoft.Wallet
+MicrosoftCorporationII.MicrosoftFamily
+MicrosoftCorporationII.QuickAssist
+Microsoft.Edge.GameAssist
+
+# --- Teams / Phone Link ---
+MicrosoftTeams
+MSTeams
+Microsoft.YourPhone
+MicrosoftWindows.CrossDevice
+
+# --- Xbox: KEPT (you game). Uncomment to remove; then also copy
+#     tweaks\optional\gamebar-off.reg into tweaks\ so you don't get ms-gamebar pop-ups.
+# Microsoft.GamingApp
+# Microsoft.XboxApp
+# Microsoft.XboxGamingOverlay
+# Microsoft.XboxGameOverlay
+# Microsoft.XboxSpeechToTextOverlay
+# Microsoft.XboxIdentityProvider
+# Microsoft.Xbox.TCUI
+
+# --- Kept by default (uncomment to remove) ---
+# Microsoft.WindowsCamera
+# Microsoft.WindowsSoundRecorder
+# Microsoft.WindowsAlarms
+# Microsoft.MicrosoftStickyNotes
+# Microsoft.ZuneMusic
+# Microsoft.ZuneVideo
+# Microsoft.Windows.Photos
+# Microsoft.Paint
+# Microsoft.ScreenSketch
+# Microsoft.WindowsCalculator

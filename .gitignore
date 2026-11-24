@@ -1,0 +1,8 @@
+# Large files you add locally; not for the repo
+*.iso
+*.wim
+*.esd
+drivers/*/
+offline-installers/*/
+!drivers/README.txt
+!offline-installers/README.txt
